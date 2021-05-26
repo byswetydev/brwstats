@@ -6,7 +6,13 @@ With this API we can: get all the statistics of a player, ca registration date, 
 I made a discord bot with this API. Link: https://discord.gg/gRWySJBKyq
 
 
--- HOW TO USE --
+----- REQUIREMENTS -----
+
+import requests
+
+from bs4 import BeautifulSoup
+
+----- HOW TO USE -----
 
 import brwserv
 
