@@ -40,4 +40,8 @@ x.getPlagiatStats() # get plagiat stats
 
 x.banStatu() # return True if player is ban, False if is not
 
-# version of API: 1.0
+in new version (1.1):
+
+x.gameStatu() # get if player is online or not
+
+# version of API: 1.1
