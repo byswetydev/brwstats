@@ -1,13 +1,12 @@
 #import time
-import json
-import logging
+# import logging
 import sys
 import os
-import datetime
+# import datetime
 import requests
 
 from bs4 import BeautifulSoup
-from datetime import datetime,timezone
+# from datetime import datetime,timezone
 
 #ts = time.time()
 
@@ -31,17 +30,17 @@ class brwAPI():
         self.stock_rank = {}
 
     def __version__(self):
-        return "1.0" # BrwServAPI version
+        return "1.1" # BrwServAPI version
 
     def getPseudo(self, name):
         name = name
         r_pseudo = requests.get(str(self.stats+name))
         if r_pseudo.ok:
+            th = False
             soup_title = BeautifulSoup(r_pseudo.text, 'html.parser')
             title = soup_title.find('h1')
             if str(title) == "<h1>404 - Page introuvable</h1>":
-                #makeLogs("Invalid Name")
-                sys.exit(1)
+                return th == True
             else:
                 self.stock = {'name' : str(name)}
                 return name
@@ -177,6 +176,19 @@ class brwAPI():
                 return ban_statu == True
             else:
                 return ban_statu == False
+        else:
+            #makeLogs("Impossible Requests")
+            sys.exit(1)
+    
+    def gameStatu(self):
+        game_statu = False
+        r_game = requests.get(str(self.stats+self.getPseudo(self.stock.get('name'))))
+        if r_game.ok:
+            soup_game = BeautifulSoup(r_game.text, 'lxml')
+            if soup_game.find('div', {"class":'conneted on'}) is None:
+                return game_statu == True
+            else:
+                return game_statu == False
         else:
             #makeLogs("Impossible Requests")
             sys.exit(1)
